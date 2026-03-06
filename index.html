@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скорость химических реакций и химическое равновесие</title>
+    <!-- Подключение Google Fonts для современного вида -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f5f7fa 0%, #e9ecf2 100%);
+            color: #1e2b3c;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #0b3954, #2a7f6e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+            border-left: 8px solid #2a7f6e;
+            padding-left: 20px;
+        }
+
+        .subhead {
+            font-size: 1.2rem;
+            color: #4a5c6e;
+            margin-bottom: 40px;
+            font-weight: 400;
+            padding-left: 28px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #0b3954;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid rgba(42, 127, 110, 0.3);
+            padding-bottom: 8px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f5e4f;
+            margin-top: 30px;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+        }
+
+        ul, ol {
+            margin-left: 25px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 25px;
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 30px -8px rgba(11, 57, 84, 0.2);
+        }
+
+        .card h4 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #0b3954;
+            margin-bottom: 15px;
+            border-left: 4px solid #2a7f6e;
+            padding-left: 12px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #2a7f6e;
+            color: white;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+
+        .formula {
+            background: #eef2f5;
+            padding: 12px 18px;
+            border-radius: 20px;
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            font-size: 1.2rem;
+            display: inline-block;
+            margin: 10px 0;
+            border-left: 6px solid #2a7f6e;
+        }
+
+        .task-block {
+            background: #ffffffd9;
+            border-radius: 28px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.02), 0 10px 20px -10px rgba(0,0,0,0.1);
+        }
+
+        .test-item {
+            background: #f9fcff;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .test-question {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .test-options {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .test-options li {
+            padding: 8px 12px;
+            margin-bottom: 6px;
+            background: #eef4f9;
+            border-radius: 40px;
+            font-size: 1rem;
+            border: 1px solid transparent;
+            transition: 0.1s;
+        }
+
+        .test-options li:hover {
+            background: #dde9f5;
+            border-color: #2a7f6e;
+        }
+
+        .answer-section {
+            background: #e2f0ef;
+            border-radius: 30px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .spoiler summary {
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: #0b3954;
+            cursor: pointer;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 40px;
+            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .spoiler[open] summary {
+            border-radius: 40px 40px 0 0;
+        }
+
+        .spoiler-content {
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 30px 30px;
+            margin-top: 5px;
+        }
+
+        hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, #2a7f6e, transparent);
+            margin: 30px 0;
+        }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #5e6f82;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 20px; }
+            h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>⚗️ Скорость химических реакций</h1>
+    <div class="subhead">и факторы, влияющие на неё. Химическое равновесие и принцип Ле Шателье</div>
+
+    <!-- Введение и определение -->
+    <section>
+        <h2>1. Скорость химической реакции</h2>
+        <p><span class="badge">Определение</span> <strong>Скорость химической реакции</strong> — это изменение концентрации одного из реагирующих веществ или продуктов реакции в единицу времени.</p>
+        <p>Для <strong>гомогенных</strong> реакций (в одной фазе, например, газ + газ или раствор):</p>
+        <div class="formula">v = ± ΔC / Δt  (моль/(л·с))</div>
+        <p>Для <strong>гетерогенных</strong> реакций (разные фазы, например, твёрдое + жидкость) скорость выражают через изменение массы твёрдого вещества на единице поверхности в единицу времени.</p>
+    </section>
+
+    <!-- Факторы -->
+    <h2>2. Факторы, влияющие на скорость реакции</h2>
+    <div class="card-grid">
+        <div class="card">
+            <h4>🧪 Природа веществ</h4>
+            <p>Активность реагентов и прочность химических связей. Например, щелочные металлы бурно реагируют с водой, а золото — инертно.</p>
+        </div>
+        <div class="card">
+            <h4>📈 Концентрация</h4>
+            <p><strong>Закон действующих масс:</strong> для реакции aA + bB → продукты скорость пропорциональна произведению концентраций в степенях, равных коэффициентам.</p>
+            <p>Пример: <span class="formula">v = k·[A]·[B]</span></p>
+        </div>
+        <div class="card">
+            <h4>🔥 Температура</h4>
+            <p><strong>Правило Вант-Гоффа:</strong> при повышении температуры на каждые 10°C скорость увеличивается в 2–4 раза (температурный коэффициент γ).</p>
+            <p><span class="formula">v₂ = v₁ · γ^{(T₂-T₁)/10}</span></p>
+        </div>
+        <div class="card">
+            <h4>🧩 Поверхность соприкосновения</h4>
+            <p>Для гетерогенных реакций чем больше площадь контакта (измельчение, пористость), тем выше скорость.</p>
+        </div>
+        <div class="card">
+            <h4>⏩ Катализаторы и ингибиторы</h4>
+            <p><strong>Катализатор</strong> ускоряет реакцию, снижая энергию активации, но не расходуется. <strong>Ингибитор</strong> замедляет реакцию.</p>
+        </div>
+    </div>
+
+    <!-- Химическое равновесие -->
+    <h2>3. Химическое равновесие</h2>
+    <p>Обратимые реакции могут протекать одновременно в прямом и обратном направлении. <strong>Химическое равновесие</strong> — состояние, при котором скорость прямой реакции равна скорости обратной, а концентрации всех участников остаются неизменными.</p>
+    <p>Это <strong>динамическое равновесие</strong>: процессы не прекращаются, но идут с одинаковой скоростью в обе стороны. Количественно равновесие описывается <strong>константой равновесия</strong> K.</p>
+
+    <!-- Принцип Ле Шателье -->
+    <h2>4. Смещение равновесия. Принцип Ле Шателье</h2>
+    <p><span class="badge">Принцип</span> Если на систему, находящуюся в равновесии, оказать внешнее воздействие, равновесие смещается в сторону той реакции, которая ослабляет это воздействие.</p>
+    <ul>
+        <li><strong>Концентрация:</strong> увеличение концентрации исходных веществ смещает равновесие в сторону продуктов (→), увеличение продуктов — в сторону исходных веществ (←).</li>
+        <li><strong>Давление (только для газов):</strong> повышение давления смещает равновесие в сторону меньшего объёма (меньшего числа молекул газа). Понижение — в сторону большего объёма.</li>
+        <li><strong>Температура:</strong> повышение температуры смещает равновесие в сторону эндотермической реакции (поглощающей тепло), понижение — в сторону экзотермической.</li>
+        <li><strong>Катализатор</strong> не смещает равновесие, а лишь ускоряет его достижение.</li>
+    </ul>
+
+    <!-- Задания для самопроверки -->
+    <hr>
+    <h2>📝 Задания для самопроверки</h2>
+
+    <!-- Тесты -->
+    <div class="task-block">
+        <h3>Тест (выберите один ответ)</h3>
+        <div class="test-item">
+            <div class="test-question">1. Как изменится скорость реакции 2SO₂ + O₂ → 2SO₃, если увеличить концентрацию кислорода в 2 раза?</div>
+            <ul class="test-options">
+                <li>А) Не изменится</li>
+                <li>Б) Увеличится в 2 раза</li>
+                <li>В) Увеличится в 4 раза</li>
+                <li>Г) Уменьшится в 2 раза</li>
+            </ul>
+        </div>
+        <div class="test-item">
+            <div class="test-question">2. Согласно правилу Вант-Гоффа, при повышении температуры с 20°C до 50°C (температурный коэффициент равен 2) скорость реакции:</div>
+            <ul class="test-options">
+                <li>А) Увеличится в 2 раза</li>
+                <li>Б) Увеличится в 4 раза</li>
+                <li>В) Увеличится в 8 раз</li>
+                <li>Г) Увеличится в 16 раз</li>
+            </ul>
+        </div>
+        <div class="test-item">
+            <div class="test-question">3. Какое давление способствует смещению равновесия реакции N₂ + 3H₂ ⇌ 2NH₃ в сторону образования аммиака?</div>
+            <ul class="test-options">
+                <li>А) Понижение давления</li>
+                <li>Б) Повышение давления</li>
+                <li>В) Давление не влияет</li>
+                <li>Г) Использование катализатора</li>
+            </ul>
+        </div>
+        <div class="test-item">
+            <div class="test-question">4. Куда сместится равновесие реакции 2NO + O₂ ⇌ 2NO₂ + Q (экзотермическая) при повышении температуры?</div>
+            <ul class="test-options">
+                <li>А) В сторону продуктов (вправо)</li>
+                <li>Б) В сторону исходных веществ (влево)</li>
+                <li>В) Не сместится</li>
+                <li>Г) Сначала влево, потом вправо</li>
+            </ul>
+        </div>
+        <div class="test-item">
+            <div class="test-question">5. Какой фактор НЕ влияет на скорость гетерогенной реакции Zn + 2HCl → ZnCl₂ + H₂↑?</div>
+            <ul class="test-options">
+                <li>А) Концентрация соляной кислоты</li>
+                <li>Б) Температура</li>
+                <li>В) Степень измельчения цинка</li>
+                <li>Г) Общий объём колбы</li>
+            </ul>
+        </div>
+        <!-- Можно добавить ещё вопросов, но для компактности хватит -->
+    </div>
+
+    <!-- Задачи -->
+    <div class="task-block">
+        <h3>Задачи (развёрнутое решение)</h3>
+        <p><strong>Задача 1.</strong> Реакция при температуре 40°C протекает за 180 секунд. За сколько секунд завершится эта реакция при температуре 60°C, если температурный коэффициент скорости реакции равен 3?</p>
+        <p><strong>Задача 2.</strong> В системе CO + Cl₂ ⇌ COCl₂ равновесные концентрации составили: [CO] = 0,2 моль/л, [Cl₂] = 0,3 моль/л, [COCl₂] = 0,4 моль/л. Рассчитайте исходные концентрации CO и Cl₂ (считать, что в начале реакции фосгена не было).</p>
+        <p><strong>Задача 3 (повышенной сложности).</strong> Во сколько раз увеличится скорость прямой реакции N₂ + 3H₂ → 2NH₃, если увеличить давление в системе в 2 раза? (Считать, что реакция элементарная, т.е. порядок по веществам соответствует стехиометрическим коэффициентам).</p>
+    </div>
+
+    <!-- Открытые задания -->
+    <div class="task-block">
+        <h3>Открытые вопросы и задания</h3>
+        <p><strong>Задание А.</strong> Предложите не менее трёх способов увеличить скорость взаимодействия кусочка мрамора (CaCO₃) с соляной кислотой (HCl).</p>
+        <p><strong>Задание Б.</strong> Объясните, почему увеличение давления не влияет на положение равновесия в реакции H₂ + I₂ ⇌ 2HI, но влияет на реакцию N₂ + 3H₂ ⇌ 2NH₃.</p>
+        <p><strong>Задание В. (Принцип Ле Шателье)</strong> Дана обратимая реакция: 2A(г) + B(г) ⇌ 2C(г) + D(тв) + Q. Определите, куда сместится равновесие при: а) увеличении концентрации A; б) понижении давления; в) повышении температуры; г) введении катализатора; д) добавлении твёрдого вещества D.</p>
+    </div>
+
+    <!-- Ответы (скрыты под спойлер) -->
+    <details class="spoiler answer-section">
+        <summary>🔍 Показать ответы и решения</summary>
+        <div class="spoiler-content">
+            <h3>Ответы на тесты</h3>
+            <ol>
+                <li><strong>Б</strong> (v = k·[SO₂]²·[O₂], увеличение [O₂] в 2 раза даёт рост в 2 раза).</li>
+                <li><strong>В</strong> (Δt=30°C, γ=2 → 2³ = 8 раз).</li>
+                <li><strong>Б</strong> (слева 4 моль газов, справа 2 моль, повышение давления смещает вправо).</li>
+                <li><strong>Б</strong> (реакция экзотермическая, нагрев благоприятствует обратному эндотермическому процессу).</li>
+                <li><strong>Г</strong> (объём колбы непосредственно не влияет на скорость; важна концентрация, температура, поверхность).</li>
+            </ol>
+            <h3>Решения задач</h3>
+            <p><strong>Задача 1.</strong> ΔT = 60-40 = 20°C; γ = 3; увеличение скорости = 3^{20/10} = 3² = 9 раз. Время уменьшится в 9 раз: 180 / 9 = 20 с. <br> <em>Ответ: 20 секунд.</em></p>
+            <p><strong>Задача 2.</strong> На образование 0,4 моль/л COCl₂ израсходовано по 0,4 моль/л CO и Cl₂. Исходные: [CO]₀ = 0,2+0,4 = 0,6 моль/л; [Cl₂]₀ = 0,3+0,4 = 0,7 моль/л. <br> <em>Ответ: [CO]₀ = 0,6 моль/л; [Cl₂]₀ = 0,7 моль/л.</em></p>
+            <p><strong>Задача 3.</strong> Для элементарной реакции v = k·[N₂]·[H₂]³. При увеличении давления в 2 раза концентрации всех газов возрастут в 2 раза. Тогда новая скорость: v' = k·(2[N₂])·(2[H₂])³ = k·2·8·[N₂][H₂]³ = 16·v. <br> <em>Ответ: увеличится в 16 раз.</em></p>
+            <h3>Ответы на открытые задания</h3>
+            <p><strong>Задание А:</strong> 1) Увеличить концентрацию кислоты; 2) нагреть раствор; 3) измельчить мрамор; 4) перемешивать.</p>
+            <p><strong>Задание Б:</strong> В реакции H₂+I₂ ⇌ 2HI число молекул газов одинаково (2 = 2), поэтому изменение давления не меняет равновесие. В реакции синтеза аммиака 4 моль газа превращаются в 2 моль, поэтому давление влияет.</p>
+            <p><strong>Задание В:</strong> а) увеличить A → вправо (→); б) понизить давление → влево (←), так как слева 3 моль газа, справа 2 моль газа (твёрдое не учитывается); в) повысить температуру → влево (←), т.к. реакция экзотермическая (+Q); г) катализатор → не смещает; д) добавить D (тв.) → не влияет.</p>
+        </div>
+    </details>
+
+    <hr>
+    <footer>
+        Материал подготовлен для углублённого изучения темы «Скорость химических реакций и химическое равновесие» • 2026
+    </footer>
+</div>
+</body>
+</html>
